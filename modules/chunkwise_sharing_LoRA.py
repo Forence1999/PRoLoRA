@@ -519,7 +519,7 @@ def save_chunk_lora(trainer):
         if "lora_A.weight" in k:
             lora_A_vec = output_state_dict[k.replace("lora_A.weight", "lora_A_vec")]
             dim_len = (
-                4096
+                5120
                 if any(
                     [
                         i in k
@@ -533,7 +533,7 @@ def save_chunk_lora(trainer):
                         ]
                     ]
                 )
-                else 11008
+                else 13824
             )
 
             v = de_reduce(
@@ -550,7 +550,7 @@ def save_chunk_lora(trainer):
         elif "lora_B.weight" in k:
             lora_B_vec = output_state_dict[k.replace("lora_B.weight", "lora_B_vec")]
             dim_len = (
-                4096
+                5120
                 if any(
                     [
                         i in k
@@ -563,7 +563,7 @@ def save_chunk_lora(trainer):
                         ]
                     ]
                 )
-                else 11008
+                else 13824
             )
 
             v = de_reduce(

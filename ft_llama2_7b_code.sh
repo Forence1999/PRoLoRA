@@ -11,7 +11,7 @@ learning_rate=$4
 seed=$5
 GPU_ID=$6
 
-output_dir=./output/code_alpaca_${TIME}_GPU_${GPU_ID}_r_${lora_r}_unshared_${unshared_r}_x_A${reduce_lora_A_x}B${reduce_lora_B_x}_lr_${learning_rate}_sd_${seed}
+output_dir=./output/13B/code_alpaca_${TIME}_GPU_${GPU_ID}_r_${lora_r}_unshared_${unshared_r}_x_A${reduce_lora_A_x}B${reduce_lora_B_x}_lr_${learning_rate}_sd_${seed}
 
 export PYTHONPATH="${PYTHONPATH}:/workspace"
 export CUDA_VISIBLE_DEVICES=$GPU_ID
@@ -33,7 +33,7 @@ python finetune_trainer.py \
     --enable_lora_rotation True \
     --init2zero_via_vec False \
     --lora_modules all \
-    --model_name_or_path meta-llama/Llama-2-7b-hf \
+    --model_name_or_path meta-llama/Llama-2-13b-hf \
     --token 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 \
     --output_dir ${output_dir} \
     --overwrite_output_dir True \
@@ -80,13 +80,13 @@ python finetune_trainer.py \
 # Merge QLoRA
 echo "------------------- Merge QLoRA -------------------"
 python /workspace/merge_lora.py \
-    --base_model_name_or_path meta-llama/Llama-2-7b-hf \
+    --base_model_name_or_path meta-llama/Llama-2-13b-hf \
     --lora_model_name_or_path ${output_dir} \
     --output_dir ${output_dir}/lora_merged/ \
     --qlora \
     --save_tokenizer
 
-# Evaluating Tulu 7B model using temperature 0.1 to get the pass@1 score
+# Evaluating Tulu model using temperature 0.1 to get the pass@1 score
 echo "------------------- Evaluating on Codex-Eval -------------------"
 python -m eval.codex_humaneval.run_eval \
     --data_file data/eval/codex_humaneval/HumanEval.jsonl \
@@ -105,7 +105,7 @@ python -m eval.codex_humaneval.run_eval \
 
 sleep 1m
 
-# Evaluating Tulu 7B model using temperature 0.8 to get the pass@10 score
+# Evaluating Tulu model using temperature 0.8 to get the pass@10 score
 echo "------------------- Evaluating on Codex-Eval -------------------"
 python -m eval.codex_humaneval.run_eval \
     --data_file data/eval/codex_humaneval/HumanEval.jsonl \

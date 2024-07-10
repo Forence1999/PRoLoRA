@@ -6,7 +6,7 @@ output_dir=$2
 export PYTHONPATH="${PYTHONPATH}:/workspace"
 export CUDA_VISIBLE_DEVICES=$GPU_ID
 
-# Evaluating Tulu 7B model using cot and no_cot format
+# Evaluating Tulu model using cot and no_cot format
 echo "------------------- Evaluating on BBH -------------------"
 python -m eval.bbh.run_eval \
     --data_dir data/eval/bbh \
@@ -21,6 +21,8 @@ python -m eval.bbh.run_eval \
     --use_chat_format \
     --chat_formatting_function eval.templates.create_prompt_with_tulu_chat_format
 
+sleep 1m
+
 python -m eval.bbh.run_eval \
     --data_dir data/eval/bbh \
     --save_dir ${output_dir}/bbh_results/cot \
@@ -32,3 +34,32 @@ python -m eval.bbh.run_eval \
     --use_vllm \
     --use_chat_format \
     --chat_formatting_function eval.templates.create_prompt_with_tulu_chat_format
+
+# # Evaluating Tulu model using cot and no_cot format
+# echo "------------------- Evaluating on BBH -------------------"
+# python -m eval.bbh.run_eval \
+#     --data_dir data/eval/bbh \
+#     --save_dir /workspace/output/13B/vanilla/bbh_results/no_cot \
+#     --model_name_or_path meta-llama/Llama-2-13b-hf \
+#     --tokenizer_name_or_path meta-llama/Llama-2-13b-hf \
+#     --use_slow_tokenizer \
+#     --no_cot \
+#     --eval_batch_size 16 \
+#     --load_in_8bit \
+#     --use_vllm \
+#     --use_chat_format \
+#     --chat_formatting_function eval.templates.create_prompt_with_tulu_chat_format
+
+# sleep 1m
+
+# python -m eval.bbh.run_eval \
+#     --data_dir data/eval/bbh \
+#     --save_dir /workspace/output/13B/vanilla/bbh_results/cot \
+#     --model_name_or_path meta-llama/Llama-2-13b-hf \
+#     --tokenizer_name_or_path meta-llama/Llama-2-13b-hf \
+#     --use_slow_tokenizer \
+#     --eval_batch_size 16 \
+#     --load_in_8bit \
+#     --use_vllm \
+#     --use_chat_format \
+#     --chat_formatting_function eval.templates.create_prompt_with_tulu_chat_format

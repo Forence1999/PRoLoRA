@@ -39,3 +39,39 @@ python -m eval.codex_humaneval.run_eval \
     --use_vllm \
     --use_chat_format \
     --chat_formatting_function eval.templates.create_prompt_with_tulu_chat_format
+
+# # Evaluating Tulu model using temperature 0.1 to get the pass@1 score
+# echo "------------------- Evaluating on Codex-Eval -------------------"
+# python -m eval.codex_humaneval.run_eval \
+#     --data_file data/eval/codex_humaneval/HumanEval.jsonl \
+#     --save_dir /workspace/output/13B/vanilla/codex_eval_results/no_chat_pass1 \
+#     --model_name_or_path meta-llama/Llama-2-13b-hf \
+#     --tokenizer_name_or_path meta-llama/Llama-2-13b-hf \
+#     --use_slow_tokenizer \
+#     --eval_pass_at_ks 1 \
+#     --temperature 0.1 \
+#     --unbiased_sampling_size_n 20 \
+#     --eval_batch_size 4 \
+#     --load_in_8bit \
+#     --use_vllm
+# # --use_chat_format \
+# # --chat_formatting_function eval.templates.create_prompt_with_tulu_chat_format
+
+# # sleep 1m
+
+# # # Evaluating Tulu model using temperature 0.8 to get the pass@10 score
+# # echo "------------------- Evaluating on Codex-Eval -------------------"
+# # python -m eval.codex_humaneval.run_eval \
+# #     --data_file data/eval/codex_humaneval/HumanEval.jsonl \
+# #     --save_dir /workspace/output/13B/vanilla/codex_eval_results/no_chat_pass10 \
+# #     --model_name_or_path meta-llama/Llama-2-13b-hf \
+# #     --tokenizer_name_or_path meta-llama/Llama-2-13b-hf \
+# #     --use_slow_tokenizer \
+# #     --eval_pass_at_ks 10 \
+# #     --temperature 0.8 \
+# #     --unbiased_sampling_size_n 20 \
+# #     --eval_batch_size 4 \
+# #     --load_in_8bit \
+# #     --use_vllm
+# # # --use_chat_format \
+# # # --chat_formatting_function eval.templates.create_prompt_with_tulu_chat_format

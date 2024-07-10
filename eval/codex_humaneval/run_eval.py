@@ -58,7 +58,7 @@ def main(args):
                 tensor_parallel_size=torch.cuda.device_count(),
                 swap_space=48,
                 block_size=32,
-                max_num_seqs=128,
+                max_num_seqs=32,
             )
             sampling_params = vllm.SamplingParams(
                 n=args.unbiased_sampling_size_n,
