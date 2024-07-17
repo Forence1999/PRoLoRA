@@ -18,6 +18,10 @@ PRoLoRA: Partial Rotation Empowers More Parameter-Efficient LoRA
 ❗️ Most of files are inherited from AllenAI's great <a href="https://github.com/allenai/open-instruct" target="_blank">work</a>. We show our greatest respect to their efforts, and all the relevant rights are reserved for the ORIGINAL authors!
 </p>
 
+<p align="center">
+  <img src="images/ProLoRA.png" alt="ProLoRA_img" style="max-width: 100%; height: auto;" />
+</p>
+
 
 ## 🔥 News
 - [2024/05/16] 🔥🔥🔥 ProLoRA is accepted by ACL 2024 (main conference)!
@@ -116,6 +120,17 @@ Here's a detailed description for each parameter:
 - `LEARNING_RATE`: Linear learning rate.
 - `SEED`: Random seed.
 - `GPU_ID`: The id of GPU assigned for the run.
+
+We also provide commands to postprocess and summarize the results, the running script is as follows:
+
+```python
+# For MMLU
+python mmlu_summarize.py --ts <TIME_SPAN>
+
+# For TydiQA
+python mmlu_summarize.py --ts <TIME_SPAN>
+```
+- `TIME_SPAN`: Duration of the present time from its last modification time in hours to be considered in result summary.
 
 
 ## © Citation
